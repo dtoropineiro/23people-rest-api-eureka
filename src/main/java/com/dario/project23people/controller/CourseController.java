@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @Validated
@@ -18,9 +19,6 @@ public class CourseController {
 
     private CourseService courseService;
 
-    public CourseController(){
-    }
-    @Autowired
     public CourseController(CourseService courseService){
         this.courseService = courseService;
     }
@@ -30,25 +28,24 @@ public class CourseController {
         return courseService.getAllCoursesNotPaginated();
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<Course> getAllCourses(Pageable paging) {
         return courseService.getAllCourses(paging);
     }
     @GetMapping("/{id}")
-    public Course getCourseById(@PathVariable Long id){
+    public Course getCourseById(@PathVariable @Min(1) Long id){
         return courseService.getCourseById(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/")
+    @PostMapping
     public String addCourse(@Valid @RequestBody Course course){
         courseService.addCourse(course);
-
         return "Course is valid, added: " + course.getName();
     }
 
     @PutMapping("/{id}")
-    public String updateCourse(@PathVariable Long id, @RequestBody Course course){
+    public String updateCourse(@Valid @PathVariable Long id, @RequestBody Course course){
         return courseService.updateCourse(id, course);
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)

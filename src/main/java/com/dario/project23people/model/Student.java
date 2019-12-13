@@ -1,25 +1,41 @@
 package com.dario.project23people.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "STUDENT")
 public class Student {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="student_seq")
+    @SequenceGenerator(name = "student_seq", sequenceName = "student_seq", initialValue = 1, allocationSize=1)
     @Column(name = "ID")
     private Long id;
     @Column(name = "NAME")
     private String name;
     @Column(name = "AGE")
     private Integer age;
+    @Size(max = 1)
     @Column(name = "GENDER")
     private String gender;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "COURSEID")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "COURSEID", insertable = true, updatable = true)
     private Course course;
+
+    @JsonIgnore
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
     public Long getId() {
         return id;
     }
