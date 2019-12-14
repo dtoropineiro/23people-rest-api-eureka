@@ -1,6 +1,7 @@
 package com.dario.project23people.model;
 
 import com.dario.project23people.validator.StudentRutConstraint;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class Student{
     @Size(max = 1)
     private String gender;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.MERGE)
     @JoinColumn(name = "COURSEID", nullable = false)
     private Course course;
@@ -29,7 +31,7 @@ public class Student{
     @StudentRutConstraint
     private String rut;
 
-    @JsonIgnore
+    //@JsonIgnore
     public Course getCourse() {
         return course;
     }

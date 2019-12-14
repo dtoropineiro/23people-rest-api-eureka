@@ -1,5 +1,7 @@
 package com.dario.project23people.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -14,6 +16,7 @@ public class Course {
     @Column(name = "ID")
     private Long id;
 
+    @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "course", cascade= CascadeType.MERGE)
     private List<Student> students;
 
