@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -12,19 +13,19 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "ID")
     private Long id;
-    @Column(name = "NAME")
     private String name;
-    @Column(name = "AGE")
     private Integer age;
     @Size(max = 1)
-    @Column(name = "GENDER")
     private String gender;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.MERGE)
     @JoinColumn(name = "COURSEID", nullable = false)
     private Course course;
+
+    @NotEmpty
+    @Size(max = 10)
+    private String rut;
 
     @JsonIgnore
     public Course getCourse() {
@@ -65,5 +66,13 @@ public class Student {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getRut() {
+        return rut;
+    }
+
+    public void setRut(String rut) {
+        this.rut = rut;
     }
 }

@@ -14,9 +14,9 @@ public class Course {
     @Column(name = "ID")
     private Long id;
 
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "course", cascade= CascadeType.MERGE)
     private List<Student> students;
+
     @NotEmpty
     @Size(max = 50)
     @Column(name = "NAME")
