@@ -11,8 +11,7 @@ import javax.validation.constraints.Size;
 public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="student_seq")
-    @SequenceGenerator(name = "student_seq", sequenceName = "student_seq", initialValue = 1, allocationSize=1)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
     @Column(name = "NAME")
@@ -23,8 +22,8 @@ public class Student {
     @Column(name = "GENDER")
     private String gender;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "COURSEID", insertable = true, updatable = true)
+    @ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.MERGE)
+    @JoinColumn(name = "COURSEID", nullable = false)
     private Course course;
 
     @JsonIgnore

@@ -10,13 +10,12 @@ import java.util.List;
 public class Course {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="course_seq")
-    @SequenceGenerator(name = "course_seq", sequenceName = "course_seq", initialValue = 1, allocationSize=1)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "course", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "course", cascade= CascadeType.MERGE)
     private List<Student> students;
     @NotEmpty
     @Size(max = 50)
