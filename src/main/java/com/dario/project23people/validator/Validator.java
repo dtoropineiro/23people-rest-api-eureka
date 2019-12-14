@@ -1,6 +1,11 @@
 package com.dario.project23people.validator;
 
-public class Validator {
+import com.dario.project23people.model.Student;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+public class Validator implements ConstraintValidator<StudentRutConstraint, String> {
 
     public boolean validateRut(String rut) {
 
@@ -26,4 +31,17 @@ public class Validator {
         }
         return validation;
     }
+
+
+    @Override
+    public void initialize(StudentRutConstraint constraintAnnotation) {
+
+    }
+
+    @Override
+    public boolean isValid(String rut, ConstraintValidatorContext constraintValidatorContext) {
+        return validateRut(rut);
+    }
+
+
 }

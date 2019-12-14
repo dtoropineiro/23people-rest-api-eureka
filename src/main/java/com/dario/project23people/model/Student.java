@@ -1,5 +1,6 @@
 package com.dario.project23people.model;
 
+import com.dario.project23people.validator.StudentRutConstraint;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "STUDENT")
-public class Student {
+public class Student{
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -25,6 +26,7 @@ public class Student {
 
     @NotEmpty
     @Size(max = 10)
+    @StudentRutConstraint
     private String rut;
 
     @JsonIgnore
