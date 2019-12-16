@@ -10,10 +10,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 @Service
 public class CourseServiceImpl implements CourseService {
 
-
+    private static final Logger LOGGER = Logger.getLogger("com.dario.project23people.service.CourseService");
+    private static final String COURSE_NOT_FOUND = "Course not found";
     private CourseRepository courseRepository;
 
     public CourseServiceImpl(){
@@ -36,7 +39,7 @@ public class CourseServiceImpl implements CourseService {
         if(pagedResult.hasContent()) {
             return pagedResult.getContent();
         } else {
-            return new ArrayList<Course>();
+            return new ArrayList<>();
         }
     }
 
@@ -48,13 +51,17 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course getCourseById(Long id){
-        return courseRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Course not found"));
+        return courseRepository.findById(id).orElseThrow(() -> {
+            LOGGER.log(Level.WARNING, COURSE_NOT_FOUND);
+            return new EntityNotFoundException(COURSE_NOT_FOUND);
+        });
+
     }
 
     @Override
     public String deleteCourse(Long id) throws EntityNotFoundException {
         if (!courseRepository.findById(id).isPresent()){
-            throw new EntityNotFoundException("Course not found");
+            throw new EntityNotFoundException(COURSE_NOT_FOUND);
         }
         courseRepository.deleteById(id);
         return "deleted course with id: " + id;
@@ -63,7 +70,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public String updateCourse(Long id, Course course) throws EntityNotFoundException {
         if (!courseRepository.findById(id).isPresent()){
-            throw new EntityNotFoundException("Course not found");
+            throw new EntityNotFoundException(COURSE_NOT_FOUND);
         }
         course.setId(id);
         courseRepository.save(course);
