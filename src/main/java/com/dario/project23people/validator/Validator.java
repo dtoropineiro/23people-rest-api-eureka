@@ -1,6 +1,5 @@
 package com.dario.project23people.validator;
 
-import com.dario.project23people.model.Student;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

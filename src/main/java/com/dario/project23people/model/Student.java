@@ -28,10 +28,9 @@ public class Student{
 
     @NotEmpty
     @Size(max = 10)
-    @StudentRutConstraint
+    //@StudentRutConstraint
     private String rut;
 
-    //@JsonIgnore
     public Course getCourse() {
         return course;
     }
