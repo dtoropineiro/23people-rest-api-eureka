@@ -3,9 +3,12 @@ package com.dario.project23people.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Validator implements ConstraintValidator<StudentRutConstraint, String> {
 
+    private static final Logger LOGGER = Logger.getLogger("com.dario.project23people.validator.Validator");
     public boolean validateRut(String rut) {
 
         boolean validation = false;
@@ -26,7 +29,9 @@ public class Validator implements ConstraintValidator<StudentRutConstraint, Stri
             }
 
         } catch (NumberFormatException e) {
+            LOGGER.log(Level.WARNING, "NumberFormatException: " + e.getMessage());
         } catch (Exception e) {
+            LOGGER.log(Level.WARNING, e.getMessage());
         }
         return validation;
     }
@@ -34,7 +39,7 @@ public class Validator implements ConstraintValidator<StudentRutConstraint, Stri
 
     @Override
     public void initialize(StudentRutConstraint constraintAnnotation) {
-
+        // Not really implemented
     }
 
     @Override

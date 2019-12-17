@@ -2,10 +2,8 @@ package com.dario.project23people.model;
 
 import com.dario.project23people.validator.StudentRutConstraint;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -28,7 +26,7 @@ public class Student{
 
     @NotEmpty
     @Size(max = 10)
-    //@StudentRutConstraint
+    @StudentRutConstraint
     private String rut;
 
     public Course getCourse() {
