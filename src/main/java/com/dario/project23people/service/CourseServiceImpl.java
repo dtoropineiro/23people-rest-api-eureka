@@ -28,7 +28,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getAllCoursesNotPaginated() {
+    public Iterable<Course> getAllCoursesNotPaginated() {
         return courseRepository.findAll();
     }
 

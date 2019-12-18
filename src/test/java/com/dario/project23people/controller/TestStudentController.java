@@ -36,8 +36,9 @@ public class TestStudentController {
     }
     @Test
     public void validateRut() throws Exception {
+        String rut = "12-4";
         Student student = new Student();
-        student.setRut("12-4");
+        student.setRut(rut);
         Gson gson = new Gson();
         String json = gson.toJson(student);
 

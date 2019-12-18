@@ -4,14 +4,12 @@ import com.dario.project23people.model.Course;
 import com.dario.project23people.service.CourseService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import java.util.List;
 
-@Validated
+
 @RestController
 @RequestMapping("/courses")
 public class CourseController {
@@ -23,7 +21,7 @@ public class CourseController {
     }
 
     @GetMapping("/all")
-    public List<Course> getAllCoursesNotPaginated(){
+    public Iterable<Course> getAllCoursesNotPaginated(){
         return courseService.getAllCoursesNotPaginated();
     }
 
@@ -32,7 +30,7 @@ public class CourseController {
         return courseService.getAllCourses(paging);
     }
     @GetMapping("/{id}")
-    public Course getCourseById(@PathVariable @Min(1) Long id){
+    public Course getCourseById(@PathVariable Long id){
         return courseService.getCourseById(id);
     }
 
@@ -42,6 +40,8 @@ public class CourseController {
         courseService.addCourse(course);
         return "Course is valid, added: " + course.getName();
     }
+
+
 
     @PutMapping("/{id}")
     public String updateCourse(@Valid @PathVariable Long id, @RequestBody Course course){

@@ -49,7 +49,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> getAllStudentsNotPaginated() {
+    public Iterable<Student> getAllStudentsNotPaginated() {
         return studentRepository.findAll();
     }
+
+
 }

@@ -13,7 +13,7 @@ public class Validator implements ConstraintValidator<StudentRutConstraint, Stri
 
         boolean validation = false;
         try {
-            rut =  rut.toUpperCase();
+            rut = rut.toUpperCase();
             rut = rut.replace(".", "");
             rut = rut.replace("-", "");
             int rutAux = Integer.parseInt(rut.substring(0, rut.length() - 1));

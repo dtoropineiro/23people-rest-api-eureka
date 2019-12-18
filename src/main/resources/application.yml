@@ -6,17 +6,14 @@ spring:
     url: jdbc:mysql://localhost:3306/course_db
     username: root
     password: root2019
+
 server:
   error:
     include-stacktrace: on_trace_param
-eureka:         #tells about the Eureka server details and its refresh time
-  instance:
-    leaseRenewalIntervalInSeconds: 1
-    leaseExpirationDurationInSeconds: 2
-  client:
-    serviceUrl:
-      defaultZone: http://127.0.0.1:8761/eureka/
-    healthcheck:
-      enabled: true
-    lease:
-      duration: 5
+
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka
+#    instance:
+#    preferIpAddress: true

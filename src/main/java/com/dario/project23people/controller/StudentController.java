@@ -2,12 +2,14 @@ package com.dario.project23people.controller;
 
 import com.dario.project23people.model.Student;
 import com.dario.project23people.service.StudentService;
+//import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
+//@EnableEurekaClient
 @RestController
 @RequestMapping("/students")
 public class StudentController {
@@ -19,7 +21,7 @@ public class StudentController {
     }
 
     @GetMapping("/all")
-    public List<Student> getAllStudentsNotPaginated(){
+    public Iterable<Student> getAllStudentsNotPaginated(){
         return studentService.getAllStudentsNotPaginated();
     }
 
@@ -31,7 +33,7 @@ public class StudentController {
     }
 
     @PutMapping("/{id}")
-    public String updateStudent(@PathVariable Long id, @RequestBody Student student){
+    public String updateStudent(@Valid @PathVariable Long id, @Valid @RequestBody Student student){
         return studentService.updateStudent(id, student);
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)

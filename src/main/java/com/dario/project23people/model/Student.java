@@ -4,6 +4,7 @@ import com.dario.project23people.validator.StudentRutConstraint;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -13,6 +14,7 @@ public class Student{
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Min(1)
     private Long id;
     private String name;
     private Integer age;

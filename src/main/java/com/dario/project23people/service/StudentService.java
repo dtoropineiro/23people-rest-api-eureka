@@ -8,5 +8,5 @@ public interface StudentService {
     String addStudent(Student student);
     String updateStudent(Long id, Student student);
     String deleteStudent(Long id);
-    List<Student> getAllStudentsNotPaginated();
+    Iterable<Student> getAllStudentsNotPaginated();
 }

@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface CourseService {
-    List<Course> getAllCoursesNotPaginated();
+    Iterable<Course> getAllCoursesNotPaginated();
     List<Course> getAllCourses(Pageable paging);
     String addCourse(Course course);
     Course getCourseById(Long id);
