@@ -1,16 +1,16 @@
 spring:
   application:
-    name: courses-projects
+    name: courses-project-dario
   cloud:
     config:
-      uri: http://localhost:8888  #where the config-service is running
+      uri: http://springconfigserver-env.k69pm7kt26.us-east-1.elasticbeanstalk.com  #where the config-service is running
       fail-fast: true
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/course_db
-    username: root
-    password: root2019
+
+
 
 server:
   error:
     include-stacktrace: on_trace_param
+
+
+
