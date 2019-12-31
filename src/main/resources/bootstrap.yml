@@ -6,8 +6,6 @@ spring:
       uri: http://springconfigserver-env.k69pm7kt26.us-east-1.elasticbeanstalk.com  #where the config-service is running
       fail-fast: true
 
-
-
 server:
   error:
     include-stacktrace: on_trace_param
