@@ -1,14 +1,30 @@
 spring:
   application:
     name: courses-project-dario
-  cloud:
-    config:
-      uri: http://springconfigserver-env.k69pm7kt26.us-east-1.elasticbeanstalk.com  #where the config-service is running
-      fail-fast: true
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: docker
 
 server:
   error:
     include-stacktrace: on_trace_param
+  port: 5000 #the default port used for zuul service
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://spring-eureka-server.us-east-1.elasticbeanstalk.com/eureka
+
 
 
 
