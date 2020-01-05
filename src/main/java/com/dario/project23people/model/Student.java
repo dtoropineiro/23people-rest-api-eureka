@@ -2,12 +2,23 @@ package com.dario.project23people.model;
 
 import com.dario.project23people.validator.StudentRutConstraint;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.springframework.data.jpa.repository.Query;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+
+@NamedStoredProcedureQuery(
+        name = "studentsByAge",
+        procedureName = "show_students",
+        resultClasses = Student.class,
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "s_age"),
+                @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = void.class, name = "ref")
+        }
+)
 @Entity
 @Table(name = "STUDENT")
 public class Student{

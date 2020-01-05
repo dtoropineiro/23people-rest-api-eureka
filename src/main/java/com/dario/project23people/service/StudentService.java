@@ -9,4 +9,6 @@ public interface StudentService {
     String updateStudent(Long id, Student student);
     String deleteStudent(Long id);
     Iterable<Student> getAllStudentsNotPaginated();
+    List<Student> getAllStudentsProcedure(Integer age);
+    List<Student> fetchStudentAge(Integer age);
 }

@@ -3,8 +3,13 @@ package com.dario.project23people.service;
 import com.dario.project23people.exception.EntityNotFoundException;
 import com.dario.project23people.model.Student;
 import com.dario.project23people.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureQuery;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,9 +18,11 @@ import java.util.logging.Logger;
 public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
+    @Autowired
+    EntityManager entityManager;
     private static final Logger LOGGER = Logger.getLogger("com.dario.project23people.service.StudentService");
     private static final String STUDENT_NOT_FOUND = "Student not found";
-
+    private static final String STUDENT_PROCEDURE = "get_students_by_age(25)";
 
     public StudentServiceImpl(StudentRepository studentRepository){
         this.studentRepository = studentRepository;
@@ -51,6 +58,22 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Iterable<Student> getAllStudentsNotPaginated() {
         return studentRepository.findAll();
+    }
+
+    @Transactional
+    @Override
+    public List getAllStudentsProcedure(Integer age) {
+        StoredProcedureQuery storedProcedure = entityManager
+                .createStoredProcedureQuery("show_students")
+                .registerStoredProcedureParameter(1, void.class, ParameterMode.REF_CURSOR)
+                .registerStoredProcedureParameter(2, Integer.class, ParameterMode.IN)
+                .setParameter(2, age);
+        return storedProcedure.getResultList();
+    }
+    @Transactional
+    @Override
+    public List<Student> fetchStudentAge(Integer age) {
+        return studentRepository.fetchStudentsAge(age);
     }
 
 
